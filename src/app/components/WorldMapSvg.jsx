@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { UncontrolledReactSVGPanZoom } from "react-svg-pan-zoom";
+import dynamic from "next/dynamic";
 
-export default function WorldMapSVG() {
+export default function WorldMapSVG(props) {
   const [guess, updateGuess] = useState([]);
   const [invlaidGuess, updateInvalidGuess] = useState(false);
   const countries = [
@@ -210,6 +211,7 @@ export default function WorldMapSVG() {
 
       path.setAttribute("fill", "yellow");
       path.setAttribute("stroke", "black");
+      path.setAttribute("stroke-width", "0.2"); // Initialize stroke width
     });
   }, []); // Empty dependency array to run only once on mount
 
@@ -243,15 +245,17 @@ export default function WorldMapSVG() {
   return (
     <div>
       <div>
-        <form className="pb-2" onSubmit={handleGuess}>
-          <input
-            className="w-[500px] h-[32px] pl-2"
-            placeholder="Guess a Country eg.USA"
-          />
-          <button className="bg-blue-500 text-white px-3 py-1 ml-2 rounded-md">
-            Guess
-          </button>
-        </form>
+        {props.showInput && (
+          <form className="pb-2" onSubmit={handleGuess}>
+            <input
+              className="w-[500px] h-[32px] pl-2"
+              placeholder="Guess a Country eg.USA"
+            />
+            <button className="bg-blue-500 text-white px-3 py-1 ml-2 rounded-md">
+              Guess
+            </button>
+          </form>
+        )}
         {invlaidGuess && (
           <p className="text-red-600 font-bold pb-8">
             Invalid Guess Try again!
@@ -265,9 +269,9 @@ export default function WorldMapSVG() {
         scaleFactorMin={0.8}
         scaleFactorMax={20}
         preventPanOutside={false}
-        defaultTool="zoom-in"
-        SVGBackground="lightblue"
-        background="lightblue"
+        defaultTool="pan"
+        SVGBackground="#004080"
+        background="#004080"
       >
         <svg width="1009.6727" height="1000.96301" fill="yellow" stroke="white">
           <path
@@ -1576,6 +1580,7 @@ export default function WorldMapSVG() {
           />
         </svg>
       </UncontrolledReactSVGPanZoom>
+      <div></div>
     </div>
   );
 }
