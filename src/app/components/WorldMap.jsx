@@ -9,12 +9,15 @@ const ZoomableSvg = ({ src }) => {
     setGameStarted(true);
   }
   function gameEnded() {
-    setGameStartedFalse();
+    setGameStarted(false);
   }
 
   return (
-    <div>
-      <Timer gameStartedFunction={gameStartedFunction} />
+    <div className="flex flex-col items-center pt-5">
+      <Timer
+        gameStartedFunction={gameStartedFunction}
+        gameEndedFunction={gameEnded}
+      />
       <div>
         <WorldMapSVG showInput={gameStarted} className="map" />
       </div>

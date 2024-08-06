@@ -7,7 +7,7 @@ export default function Timer(props) {
 
   const pad = (num, size) => String(num).padStart(size, "0");
   const renderer = ({ minutes, seconds }) => (
-    <p>
+    <p className="font-bold text-red-900 text-2xl pr-5">
       {pad(minutes, 2)}:{pad(seconds, 2)}
     </p>
   );
@@ -17,9 +17,14 @@ export default function Timer(props) {
     setQuizStarted(true);
     props.gameStartedFunction();
   };
+  const endQuiz = () => {
+    setEndTime(Date.now() + 900000); // 15 minutes from now
+    setQuizStarted(false);
+    props.gameEndedFunction();
+  };
 
   return (
-    <div>
+    <div className="flex ">
       {quizStarted && (
         <Countdown
           date={endTime}
@@ -30,12 +35,24 @@ export default function Timer(props) {
         />
       )}
       {!quizStarted && (
-        <button
-          className="btn btn-primary bg-green-700 w-[150px] h-[35px] rounded-md text-white"
-          onClick={startQuiz}
-        >
-          Start Game
-        </button>
+        <div className="pb-3">
+          <button
+            className="btn btn-primary bg-green-700 w-[150px] h-[35px] rounded-md text-white"
+            onClick={startQuiz}
+          >
+            Start Game
+          </button>
+        </div>
+      )}
+      {quizStarted && (
+        <div className="pb-3">
+          <button
+            className="btn btn-primary bg-red-700 w-[150px] h-[35px] rounded-md text-white"
+            onClick={endQuiz}
+          >
+            Give Up
+          </button>
+        </div>
       )}
     </div>
   );

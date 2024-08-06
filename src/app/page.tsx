@@ -1,12 +1,14 @@
-// pages/index.js
 import ZoomableSvg from "./components/WorldMap";
-
+import Rules from "./components/Rules";
 export default function Home({ colors = {} }) {
   return (
     <main className="flex flex-col items-center">
-      <h1 className="font-bold p-10 text-xl">World Map Quiz</h1>
-      
       <div>
+        {" "}
+        <Rules />{" "}
+      </div>
+
+      <div className="pb-10">
         <ZoomableSvg src="/world.svg" />
       </div>
     </main>
