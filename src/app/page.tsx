@@ -1,6 +1,6 @@
 import ZoomableSvg from "./components/WorldMap";
 import Rules from "./components/Rules";
-export default function Home({ colors = {} }) {
+export default function Home() {
   return (
     <main className="flex flex-col items-center">
       <div>
