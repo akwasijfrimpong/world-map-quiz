@@ -222,7 +222,7 @@ export default function WorldMapSVG(props) {
         path.setAttribute("stroke", "black");
         path.setAttribute("stroke-width", "0.2");
       });
-    }, 100); // Adjust the delay as needed
+    }, 1000); // Adjust the delay as needed
 
     return () => clearTimeout(timer);
   }, []);
